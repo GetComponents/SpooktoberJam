@@ -6,8 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    float movementSpeed;
+    float movementSpeed, sprintinSpeed;
     Vector2 movementDirection;
+    bool isSprinting;
     Rigidbody rb;
 
     // Start is called before the first frame update
@@ -18,11 +19,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        rb.velocity = new Vector3(movementDirection.x * movementSpeed, rb.velocity.y, movementDirection.y * movementSpeed);
+        if (isSprinting)
+        {
+            rb.velocity = new Vector3(movementDirection.x * movementSpeed, rb.velocity.y, movementDirection.y * sprintinSpeed);
+        }
+        else
+        {
+            rb.velocity = new Vector3(movementDirection.x * movementSpeed, rb.velocity.y, movementDirection.y * movementSpeed);
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         movementDirection = context.ReadValue<Vector2>();
+    }
+
+    private void OnSprint(InputAction.CallbackContext context)
+    {
+        isSprinting = context.ReadValue<bool>();
     }
 }
