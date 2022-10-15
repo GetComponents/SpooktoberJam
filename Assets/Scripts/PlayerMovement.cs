@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movementDirection;
     bool isSprinting;
     Rigidbody rb;
+    [SerializeField]
+    LayerMask groundmask;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +21,46 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        Move();
+        Rotate();
+    }
+
+    private void Move()
+    {
         if (isSprinting)
         {
-            rb.velocity = new Vector3(movementDirection.x * movementSpeed, rb.velocity.y, movementDirection.y * sprintinSpeed);
+            rb.velocity = new Vector3(movementDirection.x * sprintinSpeed, rb.velocity.y, movementDirection.y * sprintinSpeed);
         }
         else
         {
             rb.velocity = new Vector3(movementDirection.x * movementSpeed, rb.velocity.y, movementDirection.y * movementSpeed);
+        }
+    }
+
+    private void Rotate()
+    {
+        //Debug.Log(movementDirection.x + " / " + movementDirection.y);
+        if (movementDirection.y < 0)
+        {
+            transform.eulerAngles = new Vector3(0, 180 - (movementDirection.x * 45), 0);
+        }
+        else
+        {
+
+            transform.eulerAngles = new Vector3(0, movementDirection.x * 90, 0);
+        }
+
+
+        if (movementDirection.x == 0 && movementDirection.y == 0)
+        {
+            Ray cameraRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit hit;
+
+            if (Physics.Raycast(cameraRay, out hit, 200, groundmask))
+            {
+                Vector3 pointToLook = hit.point;
+                transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z), Vector3.up);
+            }
         }
     }
 
@@ -34,8 +69,15 @@ public class PlayerMovement : MonoBehaviour
         movementDirection = context.ReadValue<Vector2>();
     }
 
-    private void OnSprint(InputAction.CallbackContext context)
+    public void OnSprint(InputAction.CallbackContext context)
     {
-        isSprinting = context.ReadValue<bool>();
+        if (context.performed)
+        {
+            isSprinting = true;
+        }
+        else
+        {
+            isSprinting = false;
+        }
     }
 }

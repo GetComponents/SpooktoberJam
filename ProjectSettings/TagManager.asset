@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Candy
+  - DroppedCandy
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
@@ -15,9 +18,9 @@ TagManager:
   - 
   - PostProcessing
   - Not in Reflection
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - Obstacle
   - 
   - 
   - 
