@@ -31,8 +31,16 @@
                 },
                 {
                     "name": "Sprint",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "44f684bb-67d3-44a7-aa3a-35ed99ac660d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Spook",
+                    "type": "Button",
+                    "id": "ca6f0732-5ef8-48cc-8cef-7edbd865e68c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -262,11 +270,22 @@
                 {
                     "name": "",
                     "id": "0bb16e91-d0c4-4fd0-8a92-a618272341ac",
-                    "path": "",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e760a4c6-99ea-408b-99df-0c200a9872c3",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
