@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float movementSpeed, sprintinSpeed;
     Vector2 movementDirection;
-    bool isSprinting;
+    public bool isSprinting;
     Rigidbody rb;
     [SerializeField]
     LayerMask groundmask;

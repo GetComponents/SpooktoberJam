@@ -10,25 +10,29 @@ public class KidTriggerRange : MonoBehaviour
     [SerializeField]
     KidMovement Kid;
     bool jumpscareDefused;
+    [SerializeField]
+    JUMPSCAREIMAGE myImage;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && amHidden)
         {
             amHidden = false;
-            JumpScare();
+            JumpPlayer();
         }
     }
 
 
-    private void JumpScare()
+    private void JumpPlayer()
     {
+        JumpScare.Instance.JumpScarePlayer(myImage);
         StartCoroutine(WaitForResponse());
         PlayerActions.Instance.OnTryToSpook.AddListener(DefuseJumpscare);
     }
 
     private void DefuseJumpscare()
     {
+        JumpScare.Instance.HideImage(myImage);
         jumpscareDefused = true;
         Kid.RunAway();
     }
@@ -42,5 +46,7 @@ public class KidTriggerRange : MonoBehaviour
             PlayerActions.Instance.DropCandy();
             Kid.RobPlayer();
         }
+        yield return new WaitForSeconds(1f);
+        JumpScare.Instance.HideImage(myImage);
     }
 }
