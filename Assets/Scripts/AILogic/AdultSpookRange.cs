@@ -12,8 +12,13 @@ public class AdultSpookRange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && Npc.CanBeScarred)
         {
+            if (PlayerActions.Instance.GetComponent<PlayerMovement>().isSprinting)
+            {
+                Npc.CanBeScarred = false;
+                return;
+            }
             if (isInnerRing)
             {
                 Npc.playerIsClose = true;

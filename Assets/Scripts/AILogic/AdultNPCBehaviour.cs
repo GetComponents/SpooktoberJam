@@ -7,13 +7,16 @@ public class AdultNPCBehaviour : MonoBehaviour
 {
     [SerializeField]
     NavMeshAgent myNavmesh;
-
     [SerializeField]
     GameObject CandyPrefab;
     public bool playerIsClose, AmDistracted;
     public Transform GoalPos;
     public bool CanBeScarred = true;
 
+
+    private void Start()
+    {
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform == GoalPos)
