@@ -1701,8 +1701,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135aaf62e4bc99b4593bf7bd02c63196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSegmentIncrease:
+    m_PersistentCalls:
+      m_Calls: []
   myText: {fileID: 994691446}
   myDialogue: Hi there sweety<3 You got 10 Candy?
+  gameSegment: 2
   CandyRequirement: 1000
 --- !u!1001 &1023757363
 PrefabInstance:

@@ -258,6 +258,7 @@ MonoBehaviour:
   kidPrefab: {fileID: 4045417170228146363, guid: 679c2c2021f0b964b8e366322c45bd97, type: 3}
   shakeAmount: 0
   shakeCD: 3
+  AmTrashcan: 1
   spawnChance: 1
   ContainsChild: 0
 --- !u!1 &8135497877205090061

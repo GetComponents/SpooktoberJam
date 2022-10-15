@@ -176,7 +176,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2676651563850037765}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 1
   m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
@@ -527,12 +527,18 @@ MonoBehaviour:
   playerIsClose: 0
   AmDistracted: 0
   GoalPos: {fileID: 3831051142611769276, guid: 3174182c82f4a944c80b6c3d28f7d779, type: 3}
-  CanBeScarred: 1
+  CanBeScared: 1
   detourPoint: {fileID: 17010516989924745, guid: 3174182c82f4a944c80b6c3d28f7d779, type: 3}
   spooked1Speed: 8
   spooked2Speed: 10
   spooked3Speed: 13
   panicSpeed: 10
+  ps1: {fileID: 0}
+  ps2: {fileID: 0}
+  ps3: {fileID: 0}
+  movementSpeed1: 3
+  movementSpeed2: 4
+  movementSpeed3: 6
 --- !u!54 &2310530538221583670
 Rigidbody:
   m_ObjectHideFlags: 0
