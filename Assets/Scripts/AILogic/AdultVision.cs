@@ -37,7 +37,7 @@ public class AdultVision : MonoBehaviour
             {
                 if (playerInRange)
                 {
-                    Npc.CanBeScarred = false;
+                    Npc.CanBeScared = false;
                 }
             }
         }

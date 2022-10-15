@@ -11,13 +11,15 @@ public class AdultNPCBehaviour : MonoBehaviour
     GameObject CandyPrefab;
     public bool playerIsClose, AmDistracted;
     public Transform GoalPos;
-    public bool CanBeScarred = true;
+    public bool CanBeScared = true;
     [SerializeField]
     GameObject detourPoint;
     GameObject myDetourPoint;
     StoneScript bottle;
     [SerializeField]
     float spooked1Speed, spooked2Speed, spooked3Speed, panicSpeed;
+    [SerializeField]
+    ParticleSystem ps1, ps2, ps3;
 
 
     private void Start()
@@ -47,7 +49,7 @@ public class AdultNPCBehaviour : MonoBehaviour
 
     public void PanicRun()
     {
-        CanBeScarred = false;
+        CanBeScared = false;
         myNavmesh.speed = panicSpeed;
     }
 
@@ -67,27 +69,30 @@ public class AdultNPCBehaviour : MonoBehaviour
 
     public void GetSpooked()
     {
-        if (CanBeScarred)
+        if (CanBeScared)
         {
             if (playerIsClose && AmDistracted)
             {
                 DropCandy(12);
-                Debug.Log("I AM REALLY SCARRED!!");
+                ps3.Play();
+                Debug.Log("I AM REALLY SCARED!!");
                 myNavmesh.speed = spooked3Speed;
             }
             else if (playerIsClose || AmDistracted)
             {
                 DropCandy(6);
-                Debug.Log("I AM KINDA SCARRED!");
+                ps2.Play();
+                Debug.Log("I AM KINDA SCARED!");
                 myNavmesh.speed = spooked2Speed;
             }
             else
             {
                 DropCandy(3);
-                Debug.Log("I AM SLIGHTLY SCARRED");
+                ps1.Play();
+                Debug.Log("I AM SLIGHTLY SCARED");
                 myNavmesh.speed = spooked1Speed;
             }
-            CanBeScarred = false;
+            CanBeScared = false;
         }
     }
 
