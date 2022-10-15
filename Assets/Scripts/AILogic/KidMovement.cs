@@ -11,14 +11,20 @@ public class KidMovement : MonoBehaviour
     [SerializeField]
     float runAwaySpeed;
 
+    public KidSpawn MyBush;
+
     public void RunAway()
     {
+        MyBush.Parent.eulerAngles = new Vector3(0, 0, 0);
+        MyBush.ContainsChild = false;
         Debug.Log("AHHH I got spotted");
         GoToRandomGate();
     }
 
     public void RobPlayer()
     {
+        MyBush.Parent.eulerAngles = new Vector3(0, 0, 0);
+        MyBush.ContainsChild = false;
         myMovement.SetDestination(GameObject.FindGameObjectWithTag("DroppedCandy").transform.position);
     }
 
