@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 6857081017805549150}
   - component: {fileID: 8704038689016182927}
   - component: {fileID: 3069309652404080473}
+  - component: {fileID: 6688043954677239061}
   m_Layer: 0
   m_Name: SM_lantern
   m_TagString: Untagged
@@ -298,3 +299,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6688043954677239061
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6172060122433795260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5883019, y: 4.2251177, z: 0.5883019}
+  m_Center: {x: 0, y: 2.11196, z: 0}
