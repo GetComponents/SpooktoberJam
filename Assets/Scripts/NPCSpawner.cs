@@ -11,8 +11,8 @@ public class NPCSpawner : MonoBehaviour
     [SerializeField]
     Transform[] allPathpoints;
 
-    [SerializeField]
-    Transform AdultNPCParent;
+    //[SerializeField]
+    //Transform AdultNPCParent;
     [SerializeField]
     GameObject AdultNPCPRefab;
     public float SpawnCD;
@@ -51,7 +51,7 @@ public class NPCSpawner : MonoBehaviour
             GameObject tmp = Instantiate(AdultNPCPRefab, spawnPos.position, Quaternion.identity);
             tmp.transform.position = spawnPos.position;
             tmp.transform.position = new Vector3(spawnPos.position.x, 1.1f, spawnPos.position.z);
-            tmp.GetComponent<NavMeshAgent>().SetDestination(goalPos.position);
+            tmp.GetComponentInChildren<NavMeshAgent>().SetDestination(goalPos.position);
             //NavMeshHit closestHit;
             //if (NavMesh.SamplePosition(tmp.transform.position, out closestHit, 500f, NavMesh.AllAreas))
             //{
@@ -61,7 +61,7 @@ public class NPCSpawner : MonoBehaviour
             //}
             //else
             //    Debug.LogError("Could not find position on NavMesh!");
-            tmp.GetComponent<AdultNPCBehaviour>().GoalPos = goalPos;
+            tmp.GetComponentInChildren<AdultNPCBehaviour>().GoalPos = goalPos;
         }
     }
 }

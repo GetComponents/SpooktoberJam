@@ -12,6 +12,7 @@ public class AdultSpookRange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.tag);
         if (other.tag == "Player" && Npc.CanBeScarred)
         {
             if (PlayerActions.Instance.GetComponent<PlayerMovement>().isSprinting)
@@ -27,6 +28,17 @@ public class AdultSpookRange : MonoBehaviour
             {
                 PlayerActions.Instance.OnTryToSpook.AddListener(Npc.GetSpooked);
                 PlayerActions.Instance.OnEnableSpookPrompt?.Invoke();
+            }
+        }
+        if (other.tag == "Stone")
+        {
+            if (other.GetComponent<StoneScript>().AmFlying)
+            {
+                Npc.PanicRun();
+            }
+            else
+            {
+                Npc.GoToBottle(other.GetComponent<StoneScript>());
             }
         }
     }

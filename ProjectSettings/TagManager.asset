@@ -7,6 +7,9 @@ TagManager:
   - Candy
   - DroppedCandy
   - SpawnPoint
+  - Kid
+  - Crush
+  - Stone
   layers:
   - Default
   - TransparentFX

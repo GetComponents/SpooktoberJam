@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4045417170228146362}
   m_Layer: 12
   m_Name: KidPrefab
-  m_TagString: Untagged
+  m_TagString: Kid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myMovement: {fileID: 4045417171107022221}
   runAwaySpeed: 10
+  MyBush: {fileID: 0}
 --- !u!54 &4045417171107022224
 Rigidbody:
   m_ObjectHideFlags: 0

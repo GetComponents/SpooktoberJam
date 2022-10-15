@@ -30,6 +30,12 @@ public class PlayerActions : MonoBehaviour
     public UnityEvent OnTryToSpook;
     [SerializeField]
     GameObject droppedCandyPrefab;
+    public bool CrushInRange;
+    StoneScript stoneInRange;
+    StoneScript stoneInHand;
+    [SerializeField]
+    public Transform hand;
+
 
     private void Awake()
     {
@@ -51,6 +57,26 @@ public class PlayerActions : MonoBehaviour
             CandyAmount++;
             Destroy(other.gameObject);
         }
+        if (other.tag == "Crush")
+        {
+            CrushInRange = true;
+        }
+        if (other.tag == "Stone")
+        {
+            stoneInRange = other.GetComponent<StoneScript>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Crush")
+        {
+            CrushInRange = false;
+        }
+        if (other.tag == "Stone")
+        {
+            stoneInRange = null;
+        }
     }
 
     public void TryToSpook(InputAction.CallbackContext context)
@@ -59,6 +85,33 @@ public class PlayerActions : MonoBehaviour
         {
             OnTryToSpook?.Invoke();
         }
+    }
+
+    public void OnPerformAction(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (CrushInRange)
+            {
+                CrushLogic.Instance.TalkWithCrush();
+                return;
+            }
+            if (stoneInHand != null)
+            {
+                stoneInHand.ThrowStone(transform.forward);
+                stoneInHand = null;
+                return;
+            }
+            if (stoneInRange != null)
+            {
+                stoneInHand = stoneInRange;
+                stoneInRange = null;
+                Debug.Log(stoneInHand.gameObject.name);
+                stoneInHand.GetPickedUp();
+                return;
+            }
+        }
+
     }
 
     public void DropCandy()

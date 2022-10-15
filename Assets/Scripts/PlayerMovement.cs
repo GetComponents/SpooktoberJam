@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     float movementSpeed, sprintinSpeed;
-    Vector2 movementDirection;
+    public Vector2 movementDirection;
     public bool isSprinting;
     Rigidbody rb;
     [SerializeField]
