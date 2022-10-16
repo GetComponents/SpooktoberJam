@@ -5752,7 +5752,7 @@ MonoBehaviour:
       m_Calls: []
   myText: {fileID: 994691446}
   myDialogue: Hi there sweety<3 You got 10 Candy?
-  RequiredCandy: {x: 0, y: 0, z: 0}
+  RequiredCandy: {x: 20, y: 30, z: 40}
   gameSegment: 2
   CandyRequirement: 1000
 --- !u!1 &1024095841
