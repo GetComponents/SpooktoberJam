@@ -11,6 +11,7 @@ public class StoneScript : MonoBehaviour
     [SerializeField]
     MeshCollider myCollider;
     public bool AmFlying;
+    public BottleSpawner MySpawner;
 
     public void GetPickedUp()
     {
@@ -34,5 +35,10 @@ public class StoneScript : MonoBehaviour
         AmFlying = true;
         yield return new WaitForSeconds(1.5f);
         AmFlying = false;
+    }
+
+    private void OnDestroy()
+    {
+        MySpawner.myBottle = null;
     }
 }

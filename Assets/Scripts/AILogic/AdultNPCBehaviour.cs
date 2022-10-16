@@ -40,9 +40,7 @@ public class AdultNPCBehaviour : MonoBehaviour
             if (bottle != null)
                 Destroy(bottle.transform.parent.gameObject);
             myDetourPoint = null;
-            AmDistracted = false;
-            reactionImage.sprite = defaultSpr;
-            myNavmesh.SetDestination(GoalPos.position);
+            ContinueRoute();
         }
     }
 
@@ -116,5 +114,21 @@ public class AdultNPCBehaviour : MonoBehaviour
         {
             Instantiate(CandyPrefab, new Vector3(transform.position.x + Random.Range(-1.5f, 1.5f), CandyPrefab.transform.lossyScale.y * 0.5f, transform.position.z + Random.Range(-1.5f, 1.5f)), Quaternion.identity);
         }
+    }
+
+    private void ContinueRoute()
+    {
+        AmDistracted = false;
+        reactionImage.sprite = defaultSpr;
+        myNavmesh.SetDestination(GoalPos.position);
+    }
+
+    public IEnumerator ForgetBottle()
+    {
+        yield return new WaitForSeconds(2);
+        if (bottle != null)
+            Destroy(myDetourPoint.gameObject);
+        myDetourPoint = null;
+        ContinueRoute();
     }
 }
