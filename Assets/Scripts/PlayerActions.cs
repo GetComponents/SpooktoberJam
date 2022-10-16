@@ -35,6 +35,8 @@ public class PlayerActions : MonoBehaviour
     StoneScript stoneInHand;
     [SerializeField]
     public Transform hand;
+    [SerializeField]
+    AudioSource[] booSound;
 
 
     private void Awake()
@@ -83,6 +85,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (context.performed)
         {
+            booSound[Random.Range(0, booSound.Length)].Play();
             OnTryToSpook?.Invoke();
         }
     }

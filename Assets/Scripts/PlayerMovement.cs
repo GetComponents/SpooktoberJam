@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     LayerMask groundmask;
+    [SerializeField]
+    AudioSource soundFXWalk, soundFXRun;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +57,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Ray cameraRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
-
+            soundFXWalk.Stop();
+            soundFXRun.Stop();
             if (Physics.Raycast(cameraRay, out hit, 200, groundmask))
             {
                 Vector3 pointToLook = hit.point;
@@ -66,6 +69,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (movementDirection == Vector2.zero)
+        {
+            soundFXWalk.Play();
+        }
         movementDirection = context.ReadValue<Vector2>();
     }
 
@@ -74,10 +81,20 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed)
         {
             isSprinting = true;
+            if (movementDirection != Vector2.zero)
+            {
+                soundFXWalk.Stop();
+                soundFXRun.Play();
+            }
         }
         else
         {
             isSprinting = false;
+            soundFXRun.Stop();
+            if (movementDirection != Vector2.zero)
+            {
+                soundFXWalk.Play();
+            }
         }
     }
 }
