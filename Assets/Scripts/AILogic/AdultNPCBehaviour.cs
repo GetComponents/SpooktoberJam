@@ -25,8 +25,8 @@ public class AdultNPCBehaviour : MonoBehaviour
     public Sprite distractedSpr, spooked1Spr, spooked2Spr, spooked3Spr, spottedSpr, mehSpr, defaultSpr;
     [SerializeField]
     float movementSpeed1, movementSpeed2, movementSpeed3;
-
-
+    [SerializeField]
+    AudioSource[] gaspSounds;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -65,6 +65,7 @@ public class AdultNPCBehaviour : MonoBehaviour
             {
                 if (myNavmesh.SetDestination(closestHit.position))
                 {
+                    StartCoroutine(ForgetBottle());
                     if (myNavmesh.pathStatus == NavMeshPathStatus.PathComplete)
                     {
                         AmDistracted = true;
@@ -83,24 +84,24 @@ public class AdultNPCBehaviour : MonoBehaviour
             {
                 DropCandy(12);
                 //ps3.Play();
-                Debug.Log("I AM REALLY SCARED!!");
                 reactionImage.sprite = spooked3Spr;
+                gaspSounds[2].Play();
                 myNavmesh.speed = spooked3Speed;
             }
             else if (playerIsClose || AmDistracted)
             {
                 DropCandy(6);
                 //ps2.Play();
-                Debug.Log("I AM KINDA SCARED!");
                 reactionImage.sprite = spooked2Spr;
+                gaspSounds[1].Play();
                 myNavmesh.speed = spooked2Speed;
             }
             else
             {
                 DropCandy(3);
                 //ps1.Play();
-                Debug.Log("I AM SLIGHTLY SCARED");
                 reactionImage.sprite = spooked1Spr;
+                gaspSounds[0].Play();
                 myNavmesh.speed = spooked1Speed;
             }
             myNavmesh.SetDestination(GoalPos.position);

@@ -15,6 +15,8 @@ public class CrushLogic : MonoBehaviour
     private string myDialogue;
     [SerializeField]
     Vector3Int RequiredCandy;
+    [SerializeField]
+    ParticleSystem ps1, ps2;
 
     public int GameSegment
     {
@@ -134,7 +136,9 @@ public class CrushLogic : MonoBehaviour
     public void GiveCandy()
     {
         GameSegment++;
-        myText.text = "OMG THANKIUEHBJWICSKJCSKJ";
+        myText.text = "OMG THANK YOU TEEHEEHEEEHEE";
+        ps1.Play();
+        ps2.Play();
         PlayerActions.Instance.CandyAmount = 0;
     }
 }
