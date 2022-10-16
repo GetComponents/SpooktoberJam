@@ -31,7 +31,7 @@ public class AdultSpookRange : MonoBehaviour
                 PlayerActions.Instance.OnEnableSpookPrompt?.Invoke();
             }
         }
-        if (other.tag == "Stone")
+        if (other.tag == "Stone" && Npc.CanBeScared)
         {
             if (other.GetComponent<StoneScript>().AmFlying)
             {
