@@ -67,7 +67,7 @@ public class KidSpawn : MonoBehaviour
         {
             for (int j = 0; j < 10; j++)
             {
-                Parent.eulerAngles = new Vector3(Random.Range(-12f, 12f), 0, Random.Range(-12f, 12f));
+                Parent.eulerAngles = new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
                 yield return new WaitForFixedUpdate();
             }
             yield return new WaitForSeconds(shakeCD);
