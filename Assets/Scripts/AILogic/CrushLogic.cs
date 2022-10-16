@@ -13,6 +13,9 @@ public class CrushLogic : MonoBehaviour
     TextMeshProUGUI myText;
     [SerializeField]
     private string myDialogue;
+    [SerializeField]
+    Vector3Int RequiredCandy;
+
     public int GameSegment
     {
         get => gameSegment;
@@ -26,6 +29,20 @@ public class CrushLogic : MonoBehaviour
             else
             {
                 OnSegmentIncrease?.Invoke();
+                switch (gameSegment)
+                {
+                    case 0:
+                        CandyRequirement = RequiredCandy.x;
+                        break;
+                    case 1:
+                        CandyRequirement = RequiredCandy.y;
+                        break;
+                    case 2:
+                        CandyRequirement = RequiredCandy.z;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -85,25 +102,33 @@ public class CrushLogic : MonoBehaviour
 
     public void TalkWithCrush()
     {
-        switch (Random.Range(0, 3))
+        if (PlayerActions.Instance.CandyAmount >= CandyRequirement)
         {
-            case 0:
-                myText.text = $"Bruh, that's only like {Mathf.FloorToInt(PlayerActions.Instance.CandyAmount * Random.Range(0.6f, 0.8f))} candies";
-                break;
-            case 1:
-                myText.text = $"What am I supposed to do with {Mathf.FloorToInt(PlayerActions.Instance.CandyAmount * Random.Range(0.6f, 0.8f))} candies?";
-                break;
-            case 2:
-                myText.text = $"Nah, that ain't {CandyRequirement} candies, you need at least {CandyRequirement - (Mathf.FloorToInt(PlayerActions.Instance.CandyAmount * Random.Range(1.2f, 1.4f)))}";
-                break;
-            default:
-                break;
+            GiveCandy();
+        }
+        else
+        {
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    myText.text = $"Bruh, that's only like {Mathf.FloorToInt(PlayerActions.Instance.CandyAmount * Random.Range(0.6f, 0.8f))} candies";
+                    break;
+                case 1:
+                    myText.text = $"What am I supposed to do with {Mathf.FloorToInt(PlayerActions.Instance.CandyAmount * Random.Range(0.6f, 0.8f))} candies?";
+                    break;
+                case 2:
+                    myText.text = $"Nah, that ain't {CandyRequirement} candies, you need at least {CandyRequirement - (Mathf.FloorToInt(PlayerActions.Instance.CandyAmount * Random.Range(1.2f, 1.4f)))}";
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     private void EndGame()
     {
         //TODO CHange Scene;
+        Debug.Log("You win!!");
     }
 
     public void GiveCandy()

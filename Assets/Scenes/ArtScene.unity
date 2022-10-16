@@ -5360,7 +5360,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2032563250}
-  - component: {fileID: 2032563249}
   - component: {fileID: 2032563248}
   m_Layer: 0
   m_Name: PostProcess
@@ -5386,19 +5385,6 @@ MonoBehaviour:
   blendDistance: 1
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 14832cf2e4a22e145a6c6b9354a801f5, type: 2}
---- !u!65 &2032563249
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2032563247}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2032563250
 Transform:
   m_ObjectHideFlags: 0
