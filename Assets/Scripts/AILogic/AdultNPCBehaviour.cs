@@ -27,6 +27,13 @@ public class AdultNPCBehaviour : MonoBehaviour
     float movementSpeed1, movementSpeed2, movementSpeed3;
     [SerializeField]
     AudioSource[] gaspSounds;
+    [SerializeField]
+    Animator myAnim;
+
+    private void Start()
+    {
+        myAnim.SetBool("isWalking", true);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -37,6 +37,8 @@ public class PlayerActions : MonoBehaviour
     public Transform hand;
     [SerializeField]
     AudioSource[] booSound;
+    [SerializeField]
+    Animator myAnim;
 
 
     private void Awake()
@@ -85,9 +87,17 @@ public class PlayerActions : MonoBehaviour
     {
         if (context.performed)
         {
+            //myAnim.SetBool("isScaring", true);
+            //AnimWait("isScaring");
             booSound[Random.Range(0, booSound.Length)].Play();
             OnTryToSpook?.Invoke();
         }
+    }
+
+    private IEnumerator AnimWait(string _bool)
+    {
+        yield return new WaitForEndOfFrame();
+        myAnim.SetBool(_bool, false);
     }
 
     public void OnPerformAction(InputAction.CallbackContext context)

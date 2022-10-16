@@ -12,11 +12,14 @@ public class KidTriggerRange : MonoBehaviour
     bool jumpscareDefused;
     [SerializeField]
     JUMPSCAREIMAGE myImage;
+    [SerializeField]
+    Animator myAnim;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player" && amHidden)
         {
+            myAnim.SetBool("isRunning", true);
             amHidden = false;
             JumpPlayer();
         }
