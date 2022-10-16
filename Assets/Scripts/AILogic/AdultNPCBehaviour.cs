@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class AdultNPCBehaviour : MonoBehaviour
 {
@@ -20,10 +21,12 @@ public class AdultNPCBehaviour : MonoBehaviour
     float spooked1Speed, spooked2Speed, spooked3Speed, panicSpeed;
     [SerializeField]
     ParticleSystem ps1, ps2, ps3;
+    public Image reactionImage;
+    public Sprite distractedSpr, spooked1Spr, spooked2Spr, spooked3Spr, spottedSpr, mehSpr, defaultSpr;
     [SerializeField]
     float movementSpeed1, movementSpeed2, movementSpeed3;
 
- 
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -38,7 +41,7 @@ public class AdultNPCBehaviour : MonoBehaviour
                 Destroy(bottle.transform.parent.gameObject);
             myDetourPoint = null;
             AmDistracted = false;
-            //Pickup Bottle !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            reactionImage.sprite = defaultSpr;
             myNavmesh.SetDestination(GoalPos.position);
         }
     }
@@ -62,9 +65,14 @@ public class AdultNPCBehaviour : MonoBehaviour
         {
             if (myDetourPoint == null)
             {
-                AmDistracted = true;
-                myDetourPoint = Instantiate(detourPoint, closestHit.position, Quaternion.identity);
-                myNavmesh.SetDestination(closestHit.position);
+                if (myNavmesh.SetDestination(closestHit.position))
+                {
+                    if (myNavmesh.pathStatus == NavMeshPathStatus.PathComplete)
+                    {
+                        AmDistracted = true;
+                        myDetourPoint = Instantiate(detourPoint, closestHit.position, Quaternion.identity);
+                    }
+                }
             }
         }
     }
@@ -78,6 +86,7 @@ public class AdultNPCBehaviour : MonoBehaviour
                 DropCandy(12);
                 //ps3.Play();
                 Debug.Log("I AM REALLY SCARED!!");
+                reactionImage.sprite = spooked3Spr;
                 myNavmesh.speed = spooked3Speed;
             }
             else if (playerIsClose || AmDistracted)
@@ -85,6 +94,7 @@ public class AdultNPCBehaviour : MonoBehaviour
                 DropCandy(6);
                 //ps2.Play();
                 Debug.Log("I AM KINDA SCARED!");
+                reactionImage.sprite = spooked2Spr;
                 myNavmesh.speed = spooked2Speed;
             }
             else
@@ -92,6 +102,7 @@ public class AdultNPCBehaviour : MonoBehaviour
                 DropCandy(3);
                 //ps1.Play();
                 Debug.Log("I AM SLIGHTLY SCARED");
+                reactionImage.sprite = spooked1Spr;
                 myNavmesh.speed = spooked1Speed;
             }
             myNavmesh.SetDestination(GoalPos.position);

@@ -18,6 +18,7 @@ public class AdultSpookRange : MonoBehaviour
             if (PlayerActions.Instance.GetComponent<PlayerMovement>().isSprinting)
             {
                 Npc.CanBeScared = false;
+                Npc.reactionImage.sprite = Npc.spottedSpr;
                 return;
             }
             if (isInnerRing)
@@ -35,10 +36,12 @@ public class AdultSpookRange : MonoBehaviour
             if (other.GetComponent<StoneScript>().AmFlying)
             {
                 Npc.PanicRun();
+                Npc.reactionImage.sprite = Npc.mehSpr;
             }
             else
             {
                 Npc.GoToBottle(other.GetComponent<StoneScript>());
+                Npc.reactionImage.sprite = Npc.distractedSpr;
             }
         }
     }
