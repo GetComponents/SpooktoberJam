@@ -2,16 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class CrushLogic : MonoBehaviour
 {
     public static CrushLogic Instance;
 
+    public UnityEvent OnSegmentIncrease;
     [SerializeField]
     TextMeshProUGUI myText;
     [SerializeField]
     private string myDialogue;
-
+    public int GameSegment
+    {
+        get => gameSegment;
+        set
+        {
+            gameSegment = value;
+            if (gameSegment >= 3)
+            {
+                EndGame();
+            }
+            else
+            {
+                OnSegmentIncrease?.Invoke();
+            }
+        }
+    }
+    [SerializeField]
+    private int gameSegment;
     public int CandyRequirement;
 
     private void Awake()
@@ -25,6 +44,13 @@ public class CrushLogic : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        StartCoroutine(lateStart());
+    }
+
+    private IEnumerator lateStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameSegment = gameSegment;
     }
 
 
@@ -41,7 +67,7 @@ public class CrushLogic : MonoBehaviour
                     myText.text = $"PLEASE tell me you have at least {CandyRequirement} candies!!!";
                     break;
                 case 2:
-                    myText.text = $"You know how COOL it would be if you had {CandyRequirement} candies??";               
+                    myText.text = $"You know how COOL it would be if you had {CandyRequirement} candies??";
                     break;
                 default:
                     break;
@@ -72,11 +98,17 @@ public class CrushLogic : MonoBehaviour
                 break;
             default:
                 break;
-         }
+        }
+    }
+
+    private void EndGame()
+    {
+        //TODO CHange Scene;
     }
 
     public void GiveCandy()
     {
+        GameSegment++;
         myText.text = "OMG THANKIUEHBJWICSKJCSKJ";
         PlayerActions.Instance.CandyAmount = 0;
     }

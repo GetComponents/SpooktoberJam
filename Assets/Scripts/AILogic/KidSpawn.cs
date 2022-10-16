@@ -11,10 +11,38 @@ public class KidSpawn : MonoBehaviour
     int shakeAmount;
     [SerializeField]
     float shakeCD;
+    [SerializeField]
+    bool AmTrashcan;
     public float spawnChance;
     public bool ContainsChild;
     private GameObject currentKid;
 
+
+    private void Start()
+    {
+        CrushLogic.Instance.OnSegmentIncrease.AddListener(IncreaseLevel);
+    }
+
+    private void IncreaseLevel()
+    {
+        switch (CrushLogic.Instance.GameSegment)
+        {
+            case 0:
+                spawnChance = 0;
+                break;
+            case 1:
+                if (AmTrashcan)
+                {
+                    spawnChance = 0.3f;
+                }
+                break;
+            case 2:
+                spawnChance = 0.4f;
+                break;
+            default:
+                break;
+        }
+    }
 
 
     private void OnTriggerExit(Collider other)

@@ -33,6 +33,25 @@ public class NPCSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnNPC());
+        CrushLogic.Instance.OnSegmentIncrease.AddListener(IncreaseLevel);
+    }
+
+    private void IncreaseLevel()
+    {
+        switch (CrushLogic.Instance.GameSegment)
+        {
+            case 0:
+                SpawnCD = 1;
+                break;
+            case 1:
+                SpawnCD = 2;
+                break;
+            case 2:
+                SpawnCD = 3;
+                break;
+            default:
+                break;
+        }
     }
 
 

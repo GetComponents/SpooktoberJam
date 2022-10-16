@@ -20,11 +20,11 @@ public class AdultNPCBehaviour : MonoBehaviour
     float spooked1Speed, spooked2Speed, spooked3Speed, panicSpeed;
     [SerializeField]
     ParticleSystem ps1, ps2, ps3;
+    [SerializeField]
+    float movementSpeed1, movementSpeed2, movementSpeed3;
 
+ 
 
-    private void Start()
-    {
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform == GoalPos)
@@ -37,6 +37,7 @@ public class AdultNPCBehaviour : MonoBehaviour
             if (bottle != null)
                 Destroy(bottle.transform.parent.gameObject);
             myDetourPoint = null;
+            AmDistracted = false;
             //Pickup Bottle !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             myNavmesh.SetDestination(GoalPos.position);
         }
@@ -44,7 +45,7 @@ public class AdultNPCBehaviour : MonoBehaviour
 
     private void Despawn()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     public void PanicRun()
@@ -61,6 +62,7 @@ public class AdultNPCBehaviour : MonoBehaviour
         {
             if (myDetourPoint == null)
             {
+                AmDistracted = true;
                 myDetourPoint = Instantiate(detourPoint, closestHit.position, Quaternion.identity);
                 myNavmesh.SetDestination(closestHit.position);
             }
@@ -74,24 +76,25 @@ public class AdultNPCBehaviour : MonoBehaviour
             if (playerIsClose && AmDistracted)
             {
                 DropCandy(12);
-                ps3.Play();
+                //ps3.Play();
                 Debug.Log("I AM REALLY SCARED!!");
                 myNavmesh.speed = spooked3Speed;
             }
             else if (playerIsClose || AmDistracted)
             {
                 DropCandy(6);
-                ps2.Play();
+                //ps2.Play();
                 Debug.Log("I AM KINDA SCARED!");
                 myNavmesh.speed = spooked2Speed;
             }
             else
             {
                 DropCandy(3);
-                ps1.Play();
+                //ps1.Play();
                 Debug.Log("I AM SLIGHTLY SCARED");
                 myNavmesh.speed = spooked1Speed;
             }
+            myNavmesh.SetDestination(GoalPos.position);
             CanBeScared = false;
         }
     }
