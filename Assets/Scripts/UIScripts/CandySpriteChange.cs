@@ -13,5 +13,6 @@ public class CandySpriteChange : MonoBehaviour
     private void Start()
     {
         mr.material = allCandyMaterials[Random.Range(0, allCandyMaterials.Length)];
+        transform.eulerAngles = new Vector3(0, Random.Range(-180f, 180f), 0);
     }
 }
