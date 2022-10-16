@@ -65,7 +65,7 @@ public class AdultNPCBehaviour : MonoBehaviour
             {
                 if (myNavmesh.SetDestination(closestHit.position))
                 {
-                    StartCoroutine(ForgetBottle();
+                    StartCoroutine(ForgetBottle());
                     if (myNavmesh.pathStatus == NavMeshPathStatus.PathComplete)
                     {
                         AmDistracted = true;
