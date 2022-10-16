@@ -38,6 +38,7 @@ public class AdultVision : MonoBehaviour
                 if (playerInRange)
                 {
                     Npc.CanBeScared = false;
+                    Npc.reactionImage.sprite = Npc.spottedSpr;
                 }
             }
         }
