@@ -25,7 +25,10 @@ public class KidMovement : MonoBehaviour
     {
         MyBush.Parent.eulerAngles = new Vector3(0, 0, 0);
         MyBush.ContainsChild = false;
-        myMovement.SetDestination(GameObject.FindGameObjectWithTag("DroppedCandy").transform.position);
+        if (GameObject.FindGameObjectWithTag("DroppedCandy") != null)
+        {
+            myMovement.SetDestination(GameObject.FindGameObjectWithTag("DroppedCandy").transform.position);
+        }
     }
 
     private void GoToRandomGate()
@@ -41,7 +44,7 @@ public class KidMovement : MonoBehaviour
             Destroy(other.gameObject);
             StartCoroutine(FindNewCandy());
         }
-        else if(other.tag == "SpawnPoint")
+        else if (other.tag == "SpawnPoint")
         {
             Destroy(gameObject);
         }

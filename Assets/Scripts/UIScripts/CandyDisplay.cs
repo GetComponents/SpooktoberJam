@@ -11,10 +11,11 @@ public class CandyDisplay : MonoBehaviour
     void Start()
     {
         PlayerActions.Instance.OnCandyChanged.AddListener(UpdateCandyUI);
+        UpdateCandyUI();
     }
 
     private void UpdateCandyUI()
     {
-        candyText.text = $"Candy: {PlayerActions.Instance.CandyAmount}";
+        candyText.text = $"Candy: {PlayerActions.Instance.CandyAmount} / {CrushLogic.Instance.CandyRequirement}";
     }
 }

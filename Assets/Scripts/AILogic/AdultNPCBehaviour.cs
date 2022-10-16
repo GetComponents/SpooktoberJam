@@ -83,7 +83,6 @@ public class AdultNPCBehaviour : MonoBehaviour
             {
                 DropCandy(12);
                 //ps3.Play();
-                Debug.Log("I AM REALLY SCARED!!");
                 reactionImage.sprite = spooked3Spr;
                 myNavmesh.speed = spooked3Speed;
             }
@@ -91,7 +90,6 @@ public class AdultNPCBehaviour : MonoBehaviour
             {
                 DropCandy(6);
                 //ps2.Play();
-                Debug.Log("I AM KINDA SCARED!");
                 reactionImage.sprite = spooked2Spr;
                 myNavmesh.speed = spooked2Speed;
             }
@@ -99,7 +97,6 @@ public class AdultNPCBehaviour : MonoBehaviour
             {
                 DropCandy(3);
                 //ps1.Play();
-                Debug.Log("I AM SLIGHTLY SCARED");
                 reactionImage.sprite = spooked1Spr;
                 myNavmesh.speed = spooked1Speed;
             }
