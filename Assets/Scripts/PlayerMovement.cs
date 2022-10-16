@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     LayerMask groundmask;
     [SerializeField]
     AudioSource soundFXWalk, soundFXRun;
+    [SerializeField]
+    Animator myAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             soundFXWalk.Stop();
             soundFXRun.Stop();
+            myAnim.SetBool("isFalse", true);
             if (Physics.Raycast(cameraRay, out hit, 200, groundmask))
             {
                 Vector3 pointToLook = hit.point;
@@ -71,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movementDirection == Vector2.zero)
         {
+            myAnim.SetBool("isWalking", true);
             soundFXWalk.Play();
         }
         movementDirection = context.ReadValue<Vector2>();
@@ -83,12 +87,14 @@ public class PlayerMovement : MonoBehaviour
             isSprinting = true;
             if (movementDirection != Vector2.zero)
             {
+                myAnim.SetBool("isRunning", true);
                 soundFXWalk.Stop();
                 soundFXRun.Play();
             }
         }
         else
         {
+            myAnim.SetBool("isRunning", false);
             isSprinting = false;
             soundFXRun.Stop();
             if (movementDirection != Vector2.zero)
